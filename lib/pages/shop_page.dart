@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sneakersplug/components/displayer.dart';
+import 'package:sneakersplug/pages/categories_page.dart';
 import '../models/cart.dart';
 import '../models/shoe.dart';
-import '../tab_bar_elements/best_deals.dart';
-import '../tab_bar_elements/for_you_page.dart';
-import '../tab_bar_elements/new_products_page.dart';
+import 'for_you_page.dart';
+import 'new_products_page.dart';
 
 class ShopPage extends StatefulWidget {
   const ShopPage({super.key});
@@ -68,7 +68,7 @@ class _ShopPageState extends State<ShopPage> {
                   tabs: [
                     Tab(text: 'For you'),
                     Tab(text: 'New'),
-                    Tab(text: 'Best deals'),
+                    Tab(text: 'Categories'),
                   ],
                 ),
               ),
@@ -79,7 +79,7 @@ class _ShopPageState extends State<ShopPage> {
           children: [
             ForYouPage(),
             NewProductsPage(),
-            BestDeals(),
+            CategoriesPage(),
           ],
         ),
       ),
