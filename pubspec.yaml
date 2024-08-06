@@ -31,13 +31,28 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_slidable:
+  flutter_staggered_grid_view: 0.7.0
+
 
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
-  google_nav_bar: ^5.0.6
+  google_nav_bar:
   provider:
+  popover:
+  flutter_credit_card: ^4.0.1
+  collection: ^1.18.0
+  intl: ^0.19.0
+  firebase_core: ^3.2.0
+  cloud_firestore: ^5.1.0
+  google_sign_in: ^6.2.1
+  firebase_analytics: ^11.2.0
+  firebase_crashlytics: ^4.0.3
+  firebase_performance: ^0.10.0+3
+  firebase_auth: ^5.1.2
+  carousel_slider: ^4.2.1
+  smooth_page_indicator: ^1.2.0+3
 
 dev_dependencies:
   flutter_test:
@@ -55,6 +70,12 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  fonts:
+    - family: Nexa
+      fonts:
+        - asset: lib/fonts/Nexa-ExtraLight.ttf
+        - asset: lib/fonts/Nexa-Heavy.ttf
+          weight: 700
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../components/shoe_tile.dart';
+import 'package:sneakersplug/components/displayer.dart';
 import '../models/cart.dart';
 import '../models/shoe.dart';
+import '../tab_bar_elements/best_deals.dart';
+import '../tab_bar_elements/for_you_page.dart';
+import '../tab_bar_elements/new_products_page.dart';
 
 class ShopPage extends StatefulWidget {
   const ShopPage({super.key});
@@ -19,12 +21,7 @@ class _ShopPageState extends State<ShopPage> {
     // Alert user with a Snackbar
     final snackBar = SnackBar(
       content: Text('${shoe.name} added to cart!'),
-      // action: SnackBarAction(
-      //   label: 'Undo',
-      //   onPressed: () {
-      //     // Some code to undo the change.
-      //   },
-      duration: Duration(seconds: 3),
+      duration: const Duration(seconds: 3),
     );
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -32,19 +29,25 @@ class _ShopPageState extends State<ShopPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<Cart>(
-        builder: (context, value, child) => SingleChildScrollView(
+    return DefaultTabController(
+      length: 3,
+      child: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return [
+            SliverToBoxAdapter(
               child: Column(
                 children: [
-                  // search bar
+                  const ImageCarousel(),
+                  // Search bar
                   Container(
                     padding: const EdgeInsets.all(12),
-                    margin: const EdgeInsets.symmetric(horizontal: 25),
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 25, vertical: 10),
                     decoration: BoxDecoration(
                       color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Row(
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
@@ -55,105 +58,57 @@ class _ShopPageState extends State<ShopPage> {
                       ],
                     ),
                   ),
-
-                  // message
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 25.0),
-                    child: Text(
-                      'Skibidi Toilet Rizz',
-                      style: TextStyle(color: Colors.grey[600]),
-                    ),
-                  ),
-
-                  // hot picks
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: const [
-                        Text(
-                          'Trending',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24,
-                          ),
-                        ),
-                        Text(
-                          'See all',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  const SizedBox(height: 10),
-
-                  // trending shoes
-                  SizedBox(
-                    height: 300, // Adjust the height as needed
-                    child: ListView.builder(
-                      itemCount: value.shoeShop.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        Shoe shoe = value.getShoeList()[index];
-                        return ShoeTile(
-                          shoe: shoe,
-                          onTap: () => addShoeToCart(shoe),
-                        );
-                      },
-                    ),
-                  ),
-
-                  const SizedBox(height: 20),
-
-                  // For you
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: const [
-                        Text(
-                          'For you',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24,
-                          ),
-                        ),
-                        Text(
-                          'See all',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  const SizedBox(height: 10),
-
-                  // for you shoes
-                  SizedBox(
-                    height: 300, // Adjust the height as needed
-                    child: ListView.builder(
-                      itemCount: value.shoeShop.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        Shoe shoe = value.getShoeList()[index];
-                        return ShoeTile(
-                          shoe: shoe,
-                          onTap: () => addShoeToCart(shoe),
-                        );
-                      },
-                    ),
-                  ),
                 ],
               ),
-            ));
+            ),
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: _SliverAppBarDelegate(
+                const TabBar.secondary(
+                  tabs: [
+                    Tab(text: 'For you'),
+                    Tab(text: 'New'),
+                    Tab(text: 'Best deals'),
+                  ],
+                ),
+              ),
+            ),
+          ];
+        },
+        body: const TabBarView(
+          children: [
+            ForYouPage(),
+            NewProductsPage(),
+            BestDeals(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  _SliverAppBarDelegate(this._tabBar);
+
+  final TabBar _tabBar;
+
+  @override
+  double get minExtent => _tabBar.preferredSize.height;
+
+  @override
+  double get maxExtent => _tabBar.preferredSize.height;
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Container(
+      color: Colors.grey[300], // Set background color if needed
+      child: _tabBar,
+    );
+  }
+
+  @override
+  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
+    return false;
   }
 }

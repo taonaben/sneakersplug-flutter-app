@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class SizeBtn extends StatefulWidget {
   final int size;
 
-  SizeBtn({super.key, required this.size});
+  const SizeBtn({super.key, required this.size});
 
   @override
   State<SizeBtn> createState() => _SizeBtnState();
@@ -22,7 +22,7 @@ class _SizeBtnState extends State<SizeBtn> {
           borderRadius: BorderRadius.circular(10),
           color: Colors.grey[400],
         ),
-        child: Text(widget.size.toString(), style: TextStyle(fontSize: 15)),
+        child: Text(widget.size.toString(), style: const TextStyle(fontSize: 15)),
       ),
     );
   }

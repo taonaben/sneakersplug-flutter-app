@@ -9,14 +9,14 @@ class MyBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 20),
+      padding: const EdgeInsets.symmetric(vertical: 20),
       child: GNav(
         color: Colors.grey[400],
         activeColor: Colors.grey.shade700,
         tabActiveBorder: Border.all(color: Colors.white),
         tabBackgroundColor: Colors.grey.shade100,
         gap: 8,
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
         mainAxisAlignment: MainAxisAlignment.center,
         tabBorderRadius: 16,
         onTabChange: (value) => onTabChange!(value),
@@ -26,12 +26,16 @@ class MyBottomNavBar extends StatelessWidget {
             text: "Shop",
           ),
           GButton(
-            icon: Icons.favorite_outline_rounded,
+            icon: Icons.favorite_rounded,
             text: "Wishlist",
           ),
           GButton(
             icon: Icons.shopping_bag_rounded,
-            text: "Cart",
+            text: "Bag",
+          ),
+          GButton(
+            icon: Icons.account_circle_rounded,
+            text: "Profile",
           ),
         ],
       ),

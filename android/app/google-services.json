@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "407332838685",
+    "project_id": "sneakersplug-d7b17",
+    "storage_bucket": "sneakersplug-d7b17.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:407332838685:android:0c8df05914ebd8d7e395f4",
+        "android_client_info": {
+          "package_name": "com.example.sneakersplug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "407332838685-ph0e7e0mbbieci1j04horc148f68uact.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaAY7q2NkISZdniH5fh5tQOqKNcgyp2zM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "407332838685-ph0e7e0mbbieci1j04horc148f68uact.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

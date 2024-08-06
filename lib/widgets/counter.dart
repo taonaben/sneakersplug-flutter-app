@@ -1,17 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:sneakersplug/models/shoe.dart';
 
 class ItemCounter extends StatefulWidget {
+  final Shoe shoe;
+  final int quantity;
+  final Function(int) updateQuantity;
+
+  const ItemCounter({
+    super.key,
+    required this.shoe,
+    required this.quantity,
+    required this.updateQuantity,
+  });
+
   @override
   _ItemCounterState createState() => _ItemCounterState();
 }
 
 class _ItemCounterState extends State<ItemCounter> {
-  int quantity = 1;
+  late int quantity;
+
+  @override
+  void initState() {
+    super.initState();
+    quantity = widget.quantity;
+  }
 
   void _incrementQuantity() {
     setState(() {
       quantity++;
     });
+    widget.shoe.quantity = quantity;
+    widget.updateQuantity(quantity);
   }
 
   void _decrementQuantity() {
@@ -20,6 +40,8 @@ class _ItemCounterState extends State<ItemCounter> {
         quantity--;
       }
     });
+    widget.shoe.quantity = quantity;
+    widget.updateQuantity(quantity);
   }
 
   @override
@@ -27,7 +49,7 @@ class _ItemCounterState extends State<ItemCounter> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Qty: ',
           style: TextStyle(fontSize: 16),
         ),
@@ -35,18 +57,24 @@ class _ItemCounterState extends State<ItemCounter> {
           padding: const EdgeInsets.only(right: 5.0),
           child: GestureDetector(
             onTap: _decrementQuantity,
-            child: Container(
+            child: Container( 
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: quantity == 1
+                    ? Colors.transparent
+                    : Colors.white,
                 borderRadius: BorderRadius.circular(5),
               ),
-              child: Icon(Icons.remove_rounded),
+              child: Icon(
+                Icons.remove_rounded,
+                color: quantity == 1 
+                ? Colors.grey
+                : Colors. black),
             ),
           ),
         ),
         Container(
-          padding: EdgeInsets.only(left: 5, right: 5),
+          padding: const EdgeInsets.only(left: 5, right: 5),
           width: 40,
           alignment: Alignment.center,
           decoration: BoxDecoration(
@@ -56,7 +84,7 @@ class _ItemCounterState extends State<ItemCounter> {
           ),
           child: Text(
             '$quantity',
-            style: TextStyle(fontSize: 20),
+            style: const TextStyle(fontSize: 20),
           ),
         ),
         Padding(
@@ -69,7 +97,7 @@ class _ItemCounterState extends State<ItemCounter> {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(5),
               ),
-              child: Icon(Icons.add_rounded),
+              child: const Icon(Icons.add_rounded),
             ),
           ),
         ),

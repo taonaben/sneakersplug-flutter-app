@@ -1,0 +1,9 @@
+{
+    "dart.previewFlutterUiGuides": true,
+    "dart.previewFlutterUiGuidesCustomTracking": true,
+    "java.compile.nullAnalysis.mode": "automatic",
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit"
+    },
+    "java.configuration.updateBuildConfiguration": "interactive"
+}

@@ -5,7 +5,7 @@ import '../models/shoe.dart'; // Ensure this import is correct
 class ShoeSizeRow extends StatelessWidget {
   final Shoe shoe;
 
-  ShoeSizeRow({super.key, required this.shoe});
+  const ShoeSizeRow({super.key, required this.shoe});
 
   @override
   Widget build(BuildContext context) {
