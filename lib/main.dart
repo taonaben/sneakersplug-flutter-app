@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sneakersplug/firebase_options.dart';
+import 'package:sneakersplug/models/categories.dart';
 import 'package:sneakersplug/pages/checkout_page.dart';
 import 'package:sneakersplug/pages/home_page.dart';
 import 'package:sneakersplug/pages/shop_page.dart';
@@ -19,8 +20,11 @@ class ShoeShopApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => Cart(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => Categories()),
+        ChangeNotifierProvider(create: (context) => Cart()),
+      ],
       builder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
         home: const AuthGate(),

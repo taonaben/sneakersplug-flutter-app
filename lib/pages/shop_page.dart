@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sneakersplug/components/displayer.dart';
+import 'package:sneakersplug/components/image_carousel.dart';
 import 'package:sneakersplug/pages/categories_page.dart';
 import '../models/cart.dart';
 import '../models/shoe.dart';

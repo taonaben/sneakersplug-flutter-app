@@ -12,7 +12,7 @@ class Shoe {
     this.name,
     this.price,
     this.category,
-    this.imagePath,
+    this.imagePath, 
     this.size,
     this.isLiked, {
     this.quantity = 1,
