@@ -86,7 +86,8 @@ class ShoeTileAddCart extends StatelessWidget {
                     children: [
                       Text(
                         '\$${shoe.price}',
-                        style: const TextStyle(color: Colors.red, fontSize: 20),
+                        style:
+                            const TextStyle(color: Colors.black, fontSize: 18),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,

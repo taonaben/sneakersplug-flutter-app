@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sneakersplug/models/shoe.dart';
 
@@ -108,29 +109,50 @@ class Cart extends ChangeNotifier {
   */
 
   // GENERATE A RECIEPT
-  String displayCartReceipt() {
-    final reciept = StringBuffer();
-    reciept.writeln();
-
-    //formart date
-    String formattedDate =
-        DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
-
-    reciept.writeln(formattedDate);
-    reciept.writeln();
-    reciept.writeln("-----------");
-
-    for (final cartItem in userCart) {
-      reciept.writeln(
-          "${cartItem.quantity} x ${cartItem.name} - ${_formatPrice(cartItem.price)}");
-      reciept.writeln();
+  Widget getCartReceipt() {
+    if (userCart.isEmpty) {
+      return const Text("No items in cart.");
     }
-    reciept.writeln("-----------");
-    reciept.writeln();
-    reciept.writeln("Total Items: ${getTotalItemCount()}");
-    reciept.writeln("Total Price: ${_formatPrice(getTotalPrice())}");
 
-    return reciept.toString();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: userCart.map((cartItem) {
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 5.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: Image.asset(
+                      cartItem.imagePath,
+                      width: 50,
+                      height: 50,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    "${cartItem.quantity} x ${cartItem.name}",
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+              Text(
+                _formatPrice(cartItem.price),
+              ),
+            ],
+          ),
+        );
+      }).toList(),
+    );
+  }
+
+  String getDateTime() {
+    return DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
   }
 
   //FORMART DOUBLE VALUE INTO MONEY

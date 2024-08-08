@@ -17,10 +17,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
   String cvvCode = '';
   bool isCvvFocused = false;
 
-  // use wants  to pay
+  // user wants to pay
   void userTappedPay() {
     if (formKey.currentState!.validate()) {
-      // only show dialog is form is valid
+      // only show dialog if form is valid
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -29,14 +29,14 @@ class _CheckoutPageState extends State<CheckoutPage> {
             child: ListBody(
               children: [
                 Text("Card Number: $cardNumber"),
-                Text("Card Number: $expiryDate"),
-                Text("Card Number: $cardHolderName"),
-                Text("Card Number: $cvvCode"),
+                Text("Expiry Date: $expiryDate"),
+                Text("Card Holder Name: $cardHolderName"),
+                Text("CVV Code: $cvvCode"),
               ],
             ),
           ),
           actions: [
-            //cancel button
+            // cancel button
             TextButton(
                 onPressed: () => Navigator.pop(context),
                 child: const Text("Cancel")),
@@ -73,53 +73,55 @@ class _CheckoutPageState extends State<CheckoutPage> {
           )
         ],
       ),
-      body: Column(
-        children: [
-          // credit card
-          CreditCardWidget(
-              cardNumber: cardNumber,
-              expiryDate: expiryDate,
-              cardHolderName: cardHolderName,
-              cvvCode: cvvCode,
-              showBackView: isCvvFocused,
-              onCreditCardWidgetChange: (p0) {}),
-          CreditCardForm(
-              cardNumber: cardNumber,
-              expiryDate: expiryDate,
-              cardHolderName: cardHolderName,
-              cvvCode: cvvCode,
-              onCreditCardModelChange: (data) {
-                setState(() {
-                  cardNumber = data.cardNumber;
-                  expiryDate = data.expiryDate;
-                  cardHolderName = data.cardHolderName;
-                  cvvCode = data.cvvCode;
-                });
-              },
-              formKey: formKey),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // credit card
+            CreditCardWidget(
+                cardNumber: cardNumber,
+                expiryDate: expiryDate,
+                cardHolderName: cardHolderName,
+                cvvCode: cvvCode,
+                showBackView: isCvvFocused,
+                onCreditCardWidgetChange: (p0) {}),
+            CreditCardForm(
+                cardNumber: cardNumber,
+                expiryDate: expiryDate,
+                cardHolderName: cardHolderName,
+                cvvCode: cvvCode,
+                onCreditCardModelChange: (data) {
+                  setState(() {
+                    cardNumber = data.cardNumber;
+                    expiryDate = data.expiryDate;
+                    cardHolderName = data.cardHolderName;
+                    cvvCode = data.cvvCode;
+                  });
+                },
+                formKey: formKey),
 
-          const Spacer(),
+            const SizedBox(height: 20), // Add some space before the button
 
-          Padding(
-            padding: const EdgeInsets.only(bottom: 10.0),
-            child: ElevatedButton(
-              onPressed: userTappedPay,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
-                foregroundColor: Colors.white,
-                shadowColor: Colors.grey[400],
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10.0),
+              child: ElevatedButton(
+                onPressed: userTappedPay,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black,
+                  foregroundColor: Colors.white,
+                  shadowColor: Colors.grey[400],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  minimumSize: const Size(200, 60),
                 ),
-                minimumSize: const Size(200, 60),
-              ),
-              child: const Text(
-                'PayNow',
-                style: TextStyle(color: Colors.white),
+                child: const Text(
+                  'Pay Now',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

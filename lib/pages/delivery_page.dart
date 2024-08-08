@@ -10,7 +10,26 @@ class DeliveryProgressPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Delivery Progress'),
       ),
-      body: const Column(children: [MyReceipt()],),
-    ); 
+      body: const SingleChildScrollView(
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Icon(Icons.check_circle_outline_rounded),
+                ),
+                Text(
+                  "Completed",
+                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                )
+              ],
+            ),
+            MyReceipt(),
+          ],
+        ),
+      ),
+    );
   }
 }
