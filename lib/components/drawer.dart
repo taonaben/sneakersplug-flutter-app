@@ -45,6 +45,33 @@ class MyDrawer extends StatelessWidget {
                   onTap: () {},
                 ),
               ),
+
+              Padding(
+                padding: const EdgeInsets.only(left: 25.0),
+                child: MyDrawerTile(
+                  text: "Purchase History",
+                  icon: Icons.history_rounded,
+                  onTap: () {},
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.only(left: 25.0),
+                child: MyDrawerTile(
+                  text: "Contact Us",
+                  icon: Icons.call_rounded,
+                  onTap: () {},
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.only(left: 25.0),
+                child: MyDrawerTile(
+                  text: "Settings",
+                  icon: Icons.settings_rounded,
+                  onTap: () {},
+                ),
+              ),
             ],
           ),
           Padding(
